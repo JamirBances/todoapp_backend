@@ -4,6 +4,8 @@ const db = require("./utils/database"); //no lleva el .js
 const initModels = require("./models/init.models");
 const Users = require("./models/users.models");
 const Todos = require("./models/todos.models");
+const userRoutes = require("./routes/users.routes");
+const todosRoutes = require("./routes/todos.routes");
 
 //Crear una instancia de express
 const app = express();
@@ -30,6 +32,8 @@ db.sync({ force: false })
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Bienvenido al servidor." });
 });
+
+app.use("/api/v1", userRoutes, todosRoutes);
 
 //Definir las rutas de nuestros endpoints (de ahora en adelante ep)
 //todas las consultas de usuarios
@@ -101,6 +105,11 @@ app.delete("/users/:id", async (req, res) => {
     const { id } = req.params;
     const result = await Users.destroy({ where: { id } });
     res.status(200).json(result);
+
+    //validar que el usuario no tenga tareas
+    //si tiene tareas responder "no se puede eliminar"
+    //si no tiene --> eliminarlo
+
   } catch (error) {
     res.status(404).json(error.message);
   }

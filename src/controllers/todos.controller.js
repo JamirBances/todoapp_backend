@@ -11,7 +11,7 @@ const getAllTodos = async (req, res) => {
 
 const getTodosById = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const result = await TodoServices.getById(id);
     res.status(200).json(result);
   } catch (error) {
@@ -21,13 +21,19 @@ const getTodosById = async (req, res) => {
 
 const getTodosWithCategories = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const result = await TodoServices.getWithCategories(id);
-    res.json(result); //Defecto se responde status 200
+    res.json({
+      message: "Enviando tareas con categorias",
+      data: result,
+    }); //Defecto se responde status 200
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json({
+      error: error.messages,
+      details: error.stack,
+    });
   }
-}
+};
 
 const createTodo = async (req, res) => {
   try {
@@ -37,6 +43,34 @@ const createTodo = async (req, res) => {
   } catch (error) {
     res.status(404).json(error.message);
   }
-}
+};
 
-module.exports = {getAllTodos, getTodosById, getTodosWithCategories, createTodo};
+const updateTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const field = req.body;
+    const result = await TodoServices.update(field, { where: { id } });
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+
+const deleteTodo = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const result = await TodoServices.delete(id);
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+
+module.exports = {
+  getAllTodos,
+  getTodosById,
+  getTodosWithCategories,
+  createTodo,
+  updateTodo,
+  deleteTodo
+};

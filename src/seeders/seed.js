@@ -45,16 +45,46 @@ const todos = [
 ];
 
 const categories = [
-  {name: "Personal"},         //1
-  {name: "Educación"},        //2
-  {name: "Salud"},            //3
-  {name: "Trabajo"},          //4
-  {name: "Hogar"},            //5
-  {name: "Cocina"},           //6
-  {name: "Deporte"},          //7
-  {name: "Ocio"},             //8
-  {name: "Financiero"},       //9
-  {name: "Entretenimiento"},  //10     
+  {
+    name: "Personal",
+    userId: 1
+  },                          //1
+  {
+    name: "Educación",
+    userId: 1
+  },                          //2
+  {
+    name: "Salud",
+    userId: 3
+  },                          //3
+  {
+    name: "Trabajo",
+    userId: 2
+  },                          //4
+  {
+    name: "Hogar",
+    userId: 2
+  },                          //5
+  {
+    name: "Cocina",
+    userId: 2
+  },                          //6
+  {
+    name: "Deporte",
+    userId: 3
+  },                          //7
+  {
+    name: "Ocio",
+    userId: 1
+  },                          //8
+  {
+    name: "Financiero",
+    userId: 1
+  },                          //9
+  {
+    name: "Entretenimiento",
+    userId: 1
+  },                          //10     
 ];
 
 const todosCategories = [

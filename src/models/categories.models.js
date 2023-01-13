@@ -23,6 +23,15 @@ const Categories = db.define('categories', {
     allowNull: false,
     unique: true,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: "user_id",
+    references: {
+      model: 'users',
+      key: 'id',
+    }
+  }
 },
 {
   timestamps: false,

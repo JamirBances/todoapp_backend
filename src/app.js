@@ -6,11 +6,14 @@ const Users = require("./models/users.models");
 const Todos = require("./models/todos.models");
 const userRoutes = require("./routes/users.routes");
 const todosRoutes = require("./routes/todos.routes");
+const authRoutes = require('./routes/auth.routes');
+const cors = require('cors');
 
 //Crear una instancia de express
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 //Definimos el puerto
 const PORT = 8000;
@@ -33,7 +36,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Bienvenido al servidor." });
 });
 
-app.use("/api/v1", userRoutes, todosRoutes);
+app.use("/api/v1", userRoutes, todosRoutes, authRoutes);
 
 //Definir las rutas de nuestros endpoints (de ahora en adelante ep)
 //todas las consultas de usuarios
